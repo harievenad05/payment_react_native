@@ -198,7 +198,7 @@ class Register extends React.Component {
                       />
                     </Block>
 
-                    <Block middle>
+                    <Block middle style={{marginBottom: 15}}>
                       <Button color="primary" style={styles.createButton}>
                         <Text bold size={14} color={appTheme.COLORS.WHITE}>
                           CREATE ACCOUNT
@@ -206,7 +206,7 @@ class Register extends React.Component {
                       </Button>
                     </Block>
                     <Block middle>
-                        <TouchableOpacity onPress={() => alert('Nav to Login')}>
+                        <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
                           <Text>Already Registered!</Text>
                         </TouchableOpacity>
                     </Block>

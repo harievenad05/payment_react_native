@@ -93,7 +93,7 @@ class Login extends React.Component {
                 style={{marginTop: Dimensions.get('window').height / 7}}>
                 <Block flex={0.17} middle style={{marginTop: -20}}>
                   <Text size={22} h2={true}>
-                    Sign In
+                    Login
                   </Text>
                 </Block>
                 <Block flex center>
@@ -146,7 +146,7 @@ class Login extends React.Component {
                       </Button>
                     </Block>
                     <Block middle>
-                        <TouchableOpacity onPress={() => alert('Nav to Register')}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('RegisterScreen')}>
                           <Text>Don't have Account?</Text>
                         </TouchableOpacity>
                     </Block>
@@ -161,17 +161,15 @@ class Login extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   LoginReducer: state.LoginReducer,
-// });
+const mapStateToProps = (state) => ({
+  LoginReducer: state.LoginReducer,
+});
 
-// const mapDispatchToProps = {
-//   CustomerLogin: CustomerLogin
-// };
+const mapDispatchToProps = {
+  CustomerLogin: CustomerLogin
+};
 
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps,
-// )(Login);
-
-export default Login;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Login);

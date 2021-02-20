@@ -6,16 +6,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import {Provider} from 'react-redux';
 import { getLoginEndpoint } from './src/common/utils/api-end-points';
 import { store } from './src/redux/store/configureStore';
-import Register from './src/pages/Register';
-import Login from './src/pages/Login';
+import AuthNavigator from "./src/navigation/Screens";
 
 const App = () => {
   return (
     <Provider store={store}>
     <NavigationContainer>
-    <View style={styles.container}>
-      <Login/>
-    </View>
+    <AuthNavigator />
     </NavigationContainer>
     </Provider>
   );
