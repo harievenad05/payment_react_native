@@ -7,7 +7,7 @@ import axios from "axios";
  */
 
 axios
-  .get("http://192.168.0.104:3000")
+  .get("http://192.168.0.104:3000") //Don't use localhost, use ip address instead
   .then((res) => {})
   .catch((error) => {
     // console.log('debug > axios > ', error.message);
@@ -25,7 +25,7 @@ const dev = "https://SomeWebsiteee.com";
  */
 const test = "https://SomeWebsiteee.com";
 
-const local = "http://192.168.0.104:3000";
+const local = "http://192.168.0.104:3000"; //Don't use localhost, use ip address instead
 
 const google_api = "https://maps.googleapis.com/maps/api/geocode/json";
 
