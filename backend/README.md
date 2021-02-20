@@ -1,6 +1,6 @@
 # RESTful API Node Server
 
-This is the Backend RESTful APIs using Node.js, Express, and Mongoose with.
+Backend RESTful APIs using Node.js, Express, and Mongoose with.
 
 ## Installation
 
