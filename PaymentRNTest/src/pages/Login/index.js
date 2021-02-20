@@ -107,6 +107,7 @@ class Login extends React.Component {
                         placeholder="Email"
                         onChangeText={(username) => this.setEmail(username)}
                         value={this.state.username}
+                        keyboardType={'email-address'}
                         autoCapitalize="none"
                         iconContent={
                           <Icon
