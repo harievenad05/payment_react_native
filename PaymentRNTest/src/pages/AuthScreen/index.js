@@ -1,3 +1,4 @@
+import { Block } from 'galio-framework';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, StatusBar, Image } from 'react-native';
 import {connect} from 'react-redux';
@@ -23,13 +24,9 @@ class SplashScreen extends Component {
       <SafeAreaView style={styles.background}>
         <StatusBar hidden={true} />
         <Image
-          source={require('../../assets/imgs/care-white-onboard.png')}
+          source={require('../../assets/imgs/dummy-logo.png')}
           style={styles.logo}
         />
-
-        <Text style={styles.textstyle}>
-        Best Application for your business & solution.
-        </Text>
       </SafeAreaView>
     );
   }

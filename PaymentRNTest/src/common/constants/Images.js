@@ -1,11 +1,10 @@
 // local imgs
 const Onboarding = require("../../assets/imgs/bg.png");
-const Logo = require("../../assets/imgs/care-white-small.png");
-const LogoOnboarding = require("../../assets/imgs/care-white-onboard.png");
+const Logo = require("../../assets/imgs/dummy-logo.png");
+const LogoOnboarding = require("../../assets/imgs/dummy-logo.png");
 const ProfileBackground = require("../../assets/imgs/profile-screen-bg.png");
 const RegisterBackground = require("../../assets/imgs/register-bg.png");
 const Pro = require("../../assets/imgs/getPro-bg.png");
-const ArgonLogo = require("../../assets/imgs/argonlogo.png");
 const iOSLogo = require("../../assets/imgs/ios.png");
 const androidLogo = require("../../assets/imgs/android.png");
 // internet imgs
@@ -21,7 +20,6 @@ export default {
   ProfileBackground,
   ProfilePicture,
   Pro,
-  ArgonLogo,
   iOSLogo,
   androidLogo
 };
