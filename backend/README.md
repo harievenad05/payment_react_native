@@ -9,7 +9,7 @@ Please follow these steps to install:
 Clone the repo:
 
 ```bash
-git clone https://github.com/harievenad05/payment_react_native/tree/dev/backend
+git clone --depth 1 https://github.com/harievenad05/payment_react_native/
 cd payment_react_native-dev/backend
 ```
 
