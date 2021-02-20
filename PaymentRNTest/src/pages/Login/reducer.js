@@ -74,10 +74,13 @@ const LoginReducer = (state = initialState, action) => {
     case LoginAction.LOGOUT:
       return {
         ...state,
-        userToken: '',
+        loading: false,
         details: {},
+        userToken: '',
+        errorLogin: '',
+        message:'',
         logedInUserData: {},
-        isLoggedIn: false
+        isLoggedIn: false,
       };
     case LoginAction.ON_ERROR:
       return {

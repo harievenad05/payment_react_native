@@ -143,7 +143,7 @@ export const request = (
  */
 export const parseResponse = (response) =>
   new Promise((parsedResponse) => {
-    const isSuccess = response.status === 200 ? true : false;
+    const isSuccess = response.status === 200 || response.status === 201 ? true : false;
     if (isSuccess) {
       parsedResponse({ isSuccess: true, response: response });
     } else {

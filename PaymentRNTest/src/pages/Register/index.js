@@ -15,6 +15,9 @@ import {Block, Checkbox, Text, theme} from 'galio-framework';
 import {Button, Icon, Input} from '../../components';
 import {Images, appTheme} from '../../common/constants';
 import styles from './styles';
+import {RegisterUserAction} from '../Login/action';
+import { connect } from 'react-redux';
+import Loader from '../../components/Loader';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -28,7 +31,8 @@ class Register extends React.Component {
       phonenum: '',
       name: '',
       email: '',
-      password: ''
+      password: '',
+      isLoading: false
     };
   }
 
@@ -36,7 +40,7 @@ class Register extends React.Component {
   let dateReceived = moment(date).format('YYYY-MM-DD');
   console.log('agggggggeeee', this.getAge(date))
   if(this.getAge(date) >= 12){
-    this.setState({dob: dateReceived, dateofbirth: date})
+    this.setState({dob: dateReceived})
   } else {
     Alert.alert('You should be atleast 12 years old')
   }
@@ -60,16 +64,45 @@ class Register extends React.Component {
       Alert.alert('Mobile num should not contain special characters')
       return false;
     }  else {
-      alert(this.state.phonenum)
+      // alert(this.state.phonenum)
       console.log(this.state.phonenum)
       return true;
     }
   }
 
+  onRegisterPressHandler = () => {
+    Keyboard.dismiss();
+    if (this.state.name !== '' && this.state.email !== '' && this.state.dob !== '' && this.state.phonenum && this.state.password) {
+      let formattedDate = moment(this.state.dob,"YYYY-MM-DD")
+      this.setState({isLoading: true});
+      let details = {
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+        dob: formattedDate.toISOString(),
+        phoneno: this.state.phonenum
+      }
+      this.props.RegisterUserAction({
+        details,
+        onSuccess: isSuccess => this.setState({isLoading: false}),
+        onError: error => {
+          console.log(error.status);
+          this.setState({isLoading: false});
+          alert('Some Error Occured')
+        },
+      });
+      // Alert.alert('Login Success', '')
+    } else {
+      Alert.alert('Register Error', 'Field(s) should not be empty');
+    }
+  };
+
   render() {
+    const {isLoading} = this.state;
     return (
       <Block flex middle>
         <StatusBar hidden />
+        <Loader loading={isLoading} />
         <ImageBackground
           source={Images.RegisterBackground}
           style={{width, height, zIndex: 1}}>
@@ -199,7 +232,7 @@ class Register extends React.Component {
                     </Block>
 
                     <Block middle style={{marginBottom: 15}}>
-                      <Button color="primary" style={styles.createButton}>
+                      <Button color="primary" style={styles.createButton} onPress={this.onRegisterPressHandler}>
                         <Text bold size={14} color={appTheme.COLORS.WHITE}>
                           CREATE ACCOUNT
                         </Text>
@@ -221,4 +254,13 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+const mapStateToProps = (state) => ({
+  LoginReducer: state.LoginReducer,
+});
+
+const mapDispatchToProps = {
+  RegisterUserAction: RegisterUserAction
+};
+
+
+export default connect( mapStateToProps, mapDispatchToProps)(Register);

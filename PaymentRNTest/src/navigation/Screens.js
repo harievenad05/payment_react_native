@@ -8,7 +8,7 @@ import Home from '../pages/Home';
 import Profile from '../pages/Profile';
 import CustomDrawerContent from './Menu';
 
-import { Icon, Header } from "../components";
+import {Icon, Header} from '../components';
 
 import SplashScreen from '../pages/AuthScreen';
 import Login from '../pages/Login';
@@ -39,6 +39,28 @@ function ProfileStack(props) {
           headerTransparent: true,
         }}
       />
+      <Stack.Screen
+        name="AuthScreen"
+        component={OnboardingStack}
+        options={({route, navigation}) => ({
+          headerShown: false,
+        })}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function OnboardingStack(props) {
+  return (
+    <Stack.Navigator mode="card" headerMode="none">
+      <Stack.Screen
+        name="Onboarding"
+        component={SplashScreen}
+        option={{
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen name="App" component={AuthStack} />
     </Stack.Navigator>
   );
 }
@@ -51,11 +73,7 @@ function HomeStack(props) {
         component={Home}
         options={{
           header: ({navigation, scene}) => (
-            <Header
-              title="Home"
-              navigation={navigation}
-              scene={scene}
-            />
+            <Header title="Home" navigation={navigation} scene={scene} />
           ),
           cardStyle: {backgroundColor: '#F8F9FE'},
         }}
@@ -107,57 +125,53 @@ const AuthStack = (props) => {
 function AppStack(props) {
   return (
     <Drawer.Navigator
-      style={{ flex: 1 }}
-      drawerContent={props => <CustomDrawerContent {...props} />}
+      style={{flex: 1}}
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
       drawerStyle={{
-        backgroundColor: "white",
-        width: width * 0.8
+        backgroundColor: 'white',
+        width: width * 0.8,
       }}
       drawerContentOptions={{
-        activeTintcolor: "white",
-        inactiveTintColor: "#000",
-        activeBackgroundColor: "transparent",
+        activeTintcolor: 'white',
+        inactiveTintColor: '#000',
+        activeBackgroundColor: 'transparent',
         itemStyle: {
           width: width * 0.75,
-          backgroundColor: "transparent",
+          backgroundColor: 'transparent',
           paddingVertical: 16,
           paddingHorizonal: 12,
-          justifyContent: "center",
-          alignContent: "center",
-          alignItems: "center",
-          overflow: "hidden"
+          justifyContent: 'center',
+          alignContent: 'center',
+          alignItems: 'center',
+          overflow: 'hidden',
         },
         labelStyle: {
           fontSize: 18,
           marginLeft: 12,
-          fontWeight: "normal"
-        }
+          fontWeight: 'normal',
+        },
       }}
-      initialRouteName="Home"
-    >
+      initialRouteName="Home">
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Profile" component={ProfileStack} />
     </Drawer.Navigator>
   );
 }
 
-
 class AuthNavigator extends Component {
   state = {
     isLoggedIn: false,
   };
 
-  async componentDidMount() {
-  }
+  async componentDidMount() {}
 
   componentDidUpdate(prevProps) {
     const {LoginReducer} = this.props;
-    if (LoginReducer.userToken !== prevProps.LoginReducer.userToken){
-
-      if(LoginReducer.userToken !== ''){
-       this.setState({isLoggedIn: true})
-      }else{
-        this.setState({isLoggedIn:false})
+    if (LoginReducer.userToken !== prevProps.LoginReducer.userToken) {
+      if (LoginReducer.userToken !== '') {
+        this.setState({isLoggedIn: true});
+      } else {
+        this.setState({isLoggedIn: false});
       }
     }
   }
@@ -165,34 +179,41 @@ class AuthNavigator extends Component {
   render() {
     console.log(this.props, 'popspropsprops');
     return (
-        <Stack.Navigator>
-          {this.state.isLoggedIn ? (
-            <>
+      <Stack.Navigator>
+        {this.state.isLoggedIn ? (
+          <>
             <Stack.Screen
-                name="SplashScreen"
-                component={SplashScreen}
-                options={({route, navigation}) => ({
-                  headerShown: false,
-                })}
-              />
-              <Stack.Screen
-                name="AppTabNav"
-                component={AppStack}
-                options={({route, navigation}) => ({
-                  headerShown: false,
-                })}
-              />
-            </>
-          ) : (
-            <Stack.Screen
-              name="AuthStackNav"
-              component={AuthStack}
+              name="SplashScreen"
+              component={SplashScreen}
               options={({route, navigation}) => ({
                 headerShown: false,
               })}
             />
-          )}
-        </Stack.Navigator>
+            <Stack.Screen
+              name="AppTabNav"
+              component={AppStack}
+              options={({route, navigation}) => ({
+                headerShown: false,
+              })}
+            />
+            <Stack.Screen
+              name="AuthScreen"
+              component={OnboardingStack}
+              options={({route, navigation}) => ({
+                headerShown: false,
+              })}
+            />
+          </>
+        ) : (
+          <Stack.Screen
+            name="AuthStackNav"
+            component={AuthStack}
+            options={({route, navigation}) => ({
+              headerShown: false,
+            })}
+          />
+        )}
+      </Stack.Navigator>
     );
   }
 }

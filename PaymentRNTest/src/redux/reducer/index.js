@@ -13,7 +13,12 @@ export default (state, action) =>
         {
           LoginReducer: {
             loading: false,
-            logedInUserData: {}
+            details: {},
+            userToken: '',
+            errorLogin: '',
+            message:'',
+            logedInUserData: {},
+            isLoggedIn: false,
           },
         },
         action,

@@ -6,6 +6,15 @@ export const CustomerLogin = ({details, onSuccess, onError}) => ({
   payload: {details, onSuccess, onError},
 });
 
+export const RegisterUserAction = ({details, onSuccess, onError}) => ({
+  type: LoginAction.SIGNUP,
+  payload: {
+    details,
+    onSuccess,
+    onError
+  },
+});
+
 export const getUserInfoLogin = ({token, onSuccessLogin, onErrorLogin}) => ({
   type: LoginAction.FETCH_USERINFO,
   payload: {token: token, onSuccess: onSuccessLogin, onError: onErrorLogin},

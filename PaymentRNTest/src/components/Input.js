@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
     borderColor: appTheme.COLORS.BORDER,
     height: 44,
     backgroundColor: '#FFFFFF',
-    fontSize: 18
   },
   success: {
     borderColor: appTheme.COLORS.INPUT_SUCCESS,
