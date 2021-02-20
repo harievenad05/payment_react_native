@@ -3,6 +3,7 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const { toJSON, paginate } = require('./plugins');
 const { roles } = require('../config/roles');
+const { string } = require('joi');
 
 const userSchema = mongoose.Schema(
   {
@@ -34,6 +35,17 @@ const userSchema = mongoose.Schema(
         }
       },
       private: true, // used by the toJSON plugin
+    },
+    dob: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    phoneno: {
+      type: String,
+      unique: true,
+      required: true,
+      trim: true,
     },
     role: {
       type: String,
