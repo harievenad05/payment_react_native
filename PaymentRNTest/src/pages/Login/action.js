@@ -16,9 +16,9 @@ export const loginSuccess = ({message, userToken, userId, details, logedInUserDa
   payload: {message, userToken, userId, details, logedInUserData, isLoggedIn },
 });
 
-export const loginError = message => ({
+export const loginError = ({message, onError}) => ({
   type: LoginAction.LOGIN_ERROR,
-  payload: message,
+  payload: {message, onError},
 });
 
 export const setUserToken = userToken => ({

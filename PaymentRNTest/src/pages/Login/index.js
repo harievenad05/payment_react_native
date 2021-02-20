@@ -61,15 +61,19 @@ class Login extends React.Component {
     Keyboard.dismiss();
     if (this.state.username !== '' && this.state.password !== '') {
       this.setState({isLoading: true});
-      // this.props.CustomerLogin({
-      //   details,
-      //   onSuccessLogin: isSuccess => this.setState({isLoading: false}),
-      //   onErrorLogin: error => {
-      //     console.log(error.status);
-      //     this.setState({isLoading: false});
-      //     alert('Some Error Occured')
-      //   },
-      // });
+      let details = {
+        email: this.state.username,
+        password: this.state.password
+      }
+      this.props.CustomerLogin({
+        details,
+        onSuccess: isSuccess => this.setState({isLoading: false}),
+        onError: error => {
+          console.log(error.status);
+          this.setState({isLoading: false});
+          alert('Some Error Occured')
+        },
+      });
       // Alert.alert('Login Success', '')
     } else {
       Alert.alert('Login Error', 'Field(s) should not be empty');

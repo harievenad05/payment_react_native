@@ -26,20 +26,20 @@ export function* loginRequest(action) {
       yield put(
         Reducer.loginSuccess({
           message: '',
-          userToken: res.access_token,
-          userId: res.UserID,
+          userToken: res.tokens.access.token,
+          userId: res.user.id,
           details: {
-            email: res.UserName,
-            token_created: res['.issued'],
-            token_expires: res['.expires'],
-            token_expires_in: res.expires_in,
-            user_id: res.UserID,
-            user_name: res.UserName,
-            userDateFormat: res.UserDateFormat,
-            userDateTimeFormat: res.UserDateTimeFormat
+            email: res.user.email,
+            token_expires: res.tokens.access.expires,
+            refresh_token: res.tokens.refresh.token,
+            refresh_token_expires: res.tokens.refresh.expires,
+            user_id: res.user.id,
+            user_name: res.user.name,
+            phone_no: res.user.phoneno,
+            dob: res.user.dob
           },
           logedInUserData: res,
-          isLoggedIn: res.IsUserAlreadyLogedIn
+          isLoggedIn: res.tokens.access.token ? true : false
         }),
       );
 
@@ -52,6 +52,6 @@ export function* loginRequest(action) {
     const message = error;
     console.log('debug >>>>>> Errrrrrrr', message);
     yield put(Reducer.loginError({message: message}));
-    yield action.payload.onError(error.response);
+    // yield action.payload.onError(error.response);
   }
 }

@@ -13,7 +13,7 @@ class DrawerItem extends React.Component {
       case "Home":
         return (
           <Icon
-            name="person-outline"
+            name="home-outline"
             size={14}
             color={focused ? "white" : appTheme.COLORS.PRIMARY}
           />
@@ -21,7 +21,7 @@ class DrawerItem extends React.Component {
       case "Profile":
         return (
           <Icon
-            name="person-outline"
+            name="person-circle-outline"
             size={14}
             color={focused ? "white" : appTheme.COLORS.ERROR}
           />

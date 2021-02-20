@@ -8,6 +8,8 @@ import Home from '../pages/Home';
 import Profile from '../pages/Profile';
 import CustomDrawerContent from './Menu';
 
+import { Icon, Header } from "../components";
+
 import SplashScreen from '../pages/AuthScreen';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
@@ -28,7 +30,6 @@ function ProfileStack(props) {
           header: ({navigation, scene}) => (
             <Header
               transparent
-              white
               title="Profile"
               navigation={navigation}
               scene={scene}
@@ -52,8 +53,6 @@ function HomeStack(props) {
           header: ({navigation, scene}) => (
             <Header
               title="Home"
-              search
-              options
               navigation={navigation}
               scene={scene}
             />
