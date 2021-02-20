@@ -52,6 +52,6 @@
     "prettier": "^2.0.5",
     "supertest": "^6.0.1"
   },
-  "author": "Hari",
-  "license": "ISC"
+  "author": "Harie Venad",
+  "license": "MIT"
 }
