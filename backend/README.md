@@ -9,9 +9,8 @@ Please follow these steps to install:
 Clone the repo:
 
 ```bash
-git clone --depth 1 https://github.com/harievenad05/payment_react_native/tree/dev/backend
-cd node-express-boilerplate
-npx rimraf ./.git
+git clone https://github.com/harievenad05/payment_react_native/tree/dev/backend
+cd payment_react_native-dev/backend
 ```
 
 Install the dependencies:
