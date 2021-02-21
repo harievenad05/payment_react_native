@@ -35,7 +35,7 @@ const local = "http://xxx.xxx.x.xxx:3000"
 ## Project Structure
 
 ```
-App.js          # App Entry app
+App.js          # App Entry
 src\
  |--assets\         # Assets and Images
  |--common\         # Constants and App utils
