@@ -18,12 +18,37 @@ const createNewPayment = async (userId, paymentDetails) => {
   return payDetails;
 };
 
+/**
+ * Query for payments
+ * @param {Object} filter - Mongo filter
+ * @param {Object} options - Query options
+ * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
+ * @param {number} [options.limit] - Maximum number of results per page (default = 10)
+ * @param {number} [options.page] - Current page (default = 1)
+ * @returns {Promise<QueryResult>}
+ */
+const queryPayments = async (filter, options) => {
+  const payments = await Payments.paginate(filter, options);
+  return payments;
+};
+
+/**
+ * Get user by id
+ * @param {ObjectId} id
+ * @returns {Promise<User>}
+ */
+const getPaymentByuserId = async (id) => {
+  return Payments.find({"userId" : id});
+};
+
 const createNewPaymentSuccess = async (paymentDetails) => {
-  const payment = await paymentDetails.save();
+  const payment = await Payments.create(paymentDetails);
   return payment;
 };
 
 module.exports = {
   createNewPayment,
-  createNewPaymentSuccess
+  createNewPaymentSuccess,
+  queryPayments,
+  getPaymentByuserId
 };

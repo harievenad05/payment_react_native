@@ -10,6 +10,15 @@ const createPayment = {
     }),
 };
 
+const getPayments = {
+  query: Joi.object().keys({
+    userId: Joi.string(),
+    sortBy: Joi.string(),
+    limit: Joi.number().integer(),
+    page: Joi.number().integer(),
+  }),
+};
+
 const createPaymentSuccess = {
   body: Joi.object()
     .keys({
@@ -21,7 +30,15 @@ const createPaymentSuccess = {
     }),
 };
 
+const getPaymentbyUserId = {
+  params: Joi.object().keys({
+    userId: Joi.string().custom(objectId),
+  }),
+};
+
 module.exports = {
   createPayment,
-  createPaymentSuccess
+  createPaymentSuccess,
+  getPayments,
+  getPaymentbyUserId
 };

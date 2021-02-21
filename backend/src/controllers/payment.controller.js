@@ -16,15 +16,14 @@ const createPayment = catchAsync(async (req, res) => {
       });
       // const {amount, currency,receipt} = req.body
       const options = {
-        amount: 50000, // amount in smallest currency unit
-        currency: "INR",
-        receipt: "receipt_order_74394",
+        amount: req.body.amount, // amount in smallest currency unit
+        currency: req.body.currency,
     };
       const order = await instance.orders.create(options);
 
       if (!order) return res.status(500).send("Some error occured");
 
-      res.json(order);
+      res.send(order);
   } catch (error) {
       res.status(500).send(error);
   }
@@ -54,22 +53,41 @@ const paymentSuccess = catchAsync(async (req, res) => {
           paymentId: razorpayPaymentId,
           signature: razorpaySignature,
         },
+        userId: userId,
         success: true,
       });
-      await paymentService.createNewPaymentSuccess(newPayment);
-      // res.send(payment);
-    res.json({
-      msg: 'success',
-      orderId: razorpayOrderId,
-      paymentId: razorpayPaymentId,
-    });
+      const payment = await paymentService.createNewPaymentSuccess(newPayment);
+      res.send(payment);
+    // res.json({
+    //   msg: 'success',
+    //   orderId: razorpayOrderId,
+    //   paymentId: razorpayPaymentId,
+    // });
   } catch (error) {
     res.status(500).send(error);
   }
 })
 
+const getPayments = catchAsync(async (req, res) => {
+  const filter = pick(req.query, ['userId']);
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const result = await paymentService.queryPayments(filter, options);
+  res.send(result);
+});
+
+const getPaymentsbyUserId = catchAsync(async (req, res) => {
+  const payments = await paymentService.getPaymentByuserId(req.params.userId);
+  if (!payments) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Payments not found');
+  }
+  res.send(payments);
+});
+
+
 module.exports = {
   createPayment,
-  paymentSuccess
+  paymentSuccess,
+  getPayments,
+  getPaymentsbyUserId
 };
 

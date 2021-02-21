@@ -1,4 +1,5 @@
 import {all} from 'redux-saga/effects';
+import { paymentSuccessWatcher, paymentWatcher, transactionWatcher } from '../../pages/Home/saga';
 import { CustomerLoginWatcher, CustomerRegisterWatcher } from '../../pages/Login/saga';
 
 
@@ -6,6 +7,9 @@ import { CustomerLoginWatcher, CustomerRegisterWatcher } from '../../pages/Login
 export function* rootSaga() {
   yield all([
     CustomerLoginWatcher(),
-    CustomerRegisterWatcher()
+    CustomerRegisterWatcher(),
+    paymentWatcher(),
+    paymentSuccessWatcher(),
+    transactionWatcher()
   ]);
 }

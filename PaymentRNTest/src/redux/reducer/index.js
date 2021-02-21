@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
 import LoginReducer from '../../pages/Login/reducer';
+import PaymentReducer from '../../pages/Home/reducer';
 
 const appReducer = combineReducers({
   LoginReducer: LoginReducer,
+  PaymentReducer: PaymentReducer
 });
 
 //export default appReducer;
