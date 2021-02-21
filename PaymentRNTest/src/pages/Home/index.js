@@ -19,21 +19,30 @@ class HomeScreen extends Component {
       transferHistory: [],
       isLoading: false,
     }
+    this._unsubscribe;
   }
 
   componentDidMount() {
-    let details = {}
-    this.setState({isLoading: true})
-    this.props.initTransactionAction({
-      details,
-      onSuccess: (data) => {
-        console.log('dataaa', data)
-        this.setState({transferHistory: data.data, isLoading: false})
-      },
-      onError: (err) => {
-        this.setState({isLoading: false})
-      }
-    })
+    const {navigation} = this.props
+    this._unsubscribe = navigation.addListener('focus', () => {
+      // do something
+      let details = {}
+      this.setState({isLoading: true})
+      this.props.initTransactionAction({
+        details,
+        onSuccess: (data) => {
+          console.log('dataaa', data)
+          this.setState({transferHistory: data.data, isLoading: false})
+        },
+        onError: (err) => {
+          this.setState({isLoading: false})
+        }
+      })
+    });
+  }
+
+  componentWillUnmount(){
+    this._unsubscribe();
   }
 
   getOrderComponent = ({item}) => {
