@@ -25,20 +25,23 @@ class HomeScreen extends Component {
   componentDidMount() {
     const {navigation} = this.props
     this._unsubscribe = navigation.addListener('focus', () => {
-      // do something
-      let details = {}
-      this.setState({isLoading: true})
-      this.props.initTransactionAction({
-        details,
-        onSuccess: (data) => {
-          console.log('dataaa', data)
-          this.setState({transferHistory: data.data, isLoading: false})
-        },
-        onError: (err) => {
-          this.setState({isLoading: false})
-        }
-      })
+     this.getTransactionList();
     });
+  }
+
+  getTransactionList = () => {
+     let details = {}
+     this.setState({isLoading: true})
+     this.props.initTransactionAction({
+       details,
+       onSuccess: (data) => {
+         console.log('dataaa', data)
+         this.setState({transferHistory: data.data, isLoading: false})
+       },
+       onError: (err) => {
+         this.setState({isLoading: false})
+       }
+     })
   }
 
   componentWillUnmount(){
@@ -130,6 +133,7 @@ class HomeScreen extends Component {
   onSuccessPlaceTransaction = (data) => {
     console.log('Successfultrasaction', data)
     this.setState({amount: ''})
+    this.getTransactionList();
   }
 
   isValidNum = (val) => {
