@@ -40,7 +40,7 @@ function ProfileStack(props) {
         }}
       />
       <Stack.Screen
-        name="AuthScreen"
+        name="OnboardingStack"
         component={OnboardingStack}
         options={({route, navigation}) => ({
           headerShown: false,
