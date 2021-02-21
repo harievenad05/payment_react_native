@@ -32,5 +32,5 @@ export function getPaymentSuccessEndpoint() {
 }
 
 export function getTransactionDoneEndpoint(userId) {
-  return getBaseURL(envi) + `/${API_VERSION}/payments/payments/${userId}`;
+  return getBaseURL(envi) + `/${API_VERSION}/payments/${userId}`;
 }

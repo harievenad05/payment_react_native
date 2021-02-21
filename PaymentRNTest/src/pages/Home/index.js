@@ -6,32 +6,50 @@ import {Button, Icon, Input} from '../../components';
 import {Images, appTheme} from '../../common/constants';
 import styles from './styles';
 import { connect } from 'react-redux';
-import {initPaymentAction, initPaymentSuccessAction} from './action'
+import {initPaymentAction, initPaymentSuccessAction, initTransactionAction} from './action'
 import { RazorpayApiKey } from '../../../config';
+import Loader from '../../components/Loader';
 
 const {width, height} = Dimensions.get('screen');
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state={
-      amount: ''
+      amount: '',
+      transferHistory: [],
+      isLoading: false,
     }
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    let details = {}
+    this.setState({isLoading: true})
+    this.props.initTransactionAction({
+      details,
+      onSuccess: (data) => {
+        console.log('dataaa', data)
+        this.setState({transferHistory: data.data, isLoading: false})
+      },
+      onError: (err) => {
+        this.setState({isLoading: false})
+      }
+    })
+  }
 
-  getOrderComponent = (item) => {
-    console.log('itemmm', item);
+  getOrderComponent = ({item}) => {
+    console.log('itemmmsss', item);
+    const {LoginReducer} = this.props;
+    let namee = LoginReducer.details ? LoginReducer.details.user_name : 'John Doe';
     if(item){
       return (
         <Block style={{marginBottom: 20}}>
           <Block row>
             <Text color="#32325D" style={{fontSize: 18}}>Order Id: </Text>
-            <Text color="#32325D" style={{fontSize: 18}}>{item.item.name}</Text>
+            <Text color="#32325D" style={{fontSize: 18}}>{item.razorpayDetails.orderId}</Text>
           </Block>
-          <Block row>
-            <Text color="#32325D" style={{fontSize: 18}}>Amount: </Text>
-            <Text color="#32325D" style={{fontSize: 18}}>{item.item.name}</Text>
+          <Block row style={{marginTop: 3}}>
+            <Text color="#32325D" style={{fontSize: 18}}>Order By: </Text>
+            <Text color="#32325D" style={{fontSize: 18}}>{namee}</Text>
           </Block>
         </Block>
       );
@@ -114,38 +132,12 @@ class HomeScreen extends Component {
     }
   }
   render() {
-    const {amount} = this.state
+    const {amount, isLoading, transferHistory} = this.state;
     console.log('aammmmmount', amount)
-    let data = [
-      // {
-      //   name: 'Breakbot',
-      //   songs: [
-      //     {
-      //       title: 'Star Tripper',
-      //       album: 'Still Waters',
-      //     },
-      //     {
-      //       title: 'You Should Know (feat. Ruckazoid)',
-      //       album: 'Still Waters',
-      //     },
-      //   ],
-      // },
-      // {
-      //   name: 'Breakbot 2',
-      //   songs: [
-      //     {
-      //       title: 'Star Tripper',
-      //       album: 'Still Waters',
-      //     },
-      //     {
-      //       title: 'You Should Know (feat. Ruckazoid)',
-      //       album: 'Still Waters',
-      //     },
-      //   ],
-      // },
-    ];
+
     return (
       <View style={{flex: 1}}>
+        <Loader loading={isLoading} />
         <Block height={height} style={{alignItems: 'center'}}>
           <Block width={width * 0.8}>
             <Block height={height / 6} style={{marginTop: 45}}>
@@ -183,7 +175,7 @@ class HomeScreen extends Component {
               </Text>
             </Block>
             <FlatList
-              data={data}
+              data={transferHistory}
               keyExtractor={(item, index) => index.toString()}
               renderItem={(item) => this.getOrderComponent(item)}
             />
@@ -200,7 +192,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   initPaymentAction: initPaymentAction,
-  initPaymentSuccessAction: initPaymentSuccessAction
+  initPaymentSuccessAction: initPaymentSuccessAction,
+  initTransactionAction: initTransactionAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
