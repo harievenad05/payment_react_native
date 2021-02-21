@@ -32,6 +32,18 @@ With your ip address
 const local = "http://xxx.xxx.x.xxx:3000"
 ```
 
+## Project Structure
+
+```
+App.js          # App Entry app
+src\
+ |--assets\         # Assets and Images
+ |--common\         # Constants and App utils
+ |--components\     # Resuable components
+ |--navigation\     # Navigators (Stack and Drawer)
+ |--pages\          # Main Screen with sagas
+ |--redux\          # Redux, reducers and main saga
+```
 
 ## Commands
 
