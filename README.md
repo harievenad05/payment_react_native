@@ -30,4 +30,4 @@ Install the dependencies:
 yarn install
 ```
 
-Follow the README.md instructions in repective directory to run the application
+Follow the README.md instructions in respective directory to run the application
