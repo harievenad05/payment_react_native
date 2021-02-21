@@ -69,9 +69,6 @@ SMTP_USERNAME=email-server-username
 SMTP_PASSWORD=email-server-password
 EMAIL_FROM=support@yourapp.com
 ```
-
-## Project Structure
-
 ## Features
 
 - **ES9**: latest ECMAScript features
@@ -88,6 +85,9 @@ EMAIL_FROM=support@yourapp.com
 - **Santizing**: sanitize request data against xss and query injection
 - **CORS**: Cross-Origin Resource-Sharing enabled using [cors](https://github.com/expressjs/cors)
 - **Compression**: gzip compression with [compression](https://github.com/expressjs/compression)
+
+
+## Project Structure
 
 ```
 src\
